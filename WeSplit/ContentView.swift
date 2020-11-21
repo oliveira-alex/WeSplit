@@ -13,12 +13,13 @@ struct ContentView: View {
     
 	var body: some View {
 		VStack {
-			HStack{
-				Text("Select\nyour\nstudent")
+			HStack(spacing: 0.0){
+				Text("Select your student")
+					.frame(maxWidth: 60)
 				
 				Picker("", selection: $selectedStudent) {
-					ForEach(0 ..< students.count) {
-						Text(self.students[$0]).tag(self.students[$0])
+					ForEach(students, id: \.self) { student in
+						Text(student)
 					}
 				}
 			}
