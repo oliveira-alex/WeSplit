@@ -17,7 +17,7 @@ struct ContentView: View {
 	var totalPerPerson: Double {
 		let peopleCount = Double(numberOfPeople + 2)
 		let tipSelection = Double(tipPercentages[tipPercentage])
-		let orderAmount = Double(checkAmount) ?? 0
+		let orderAmount = Double(checkAmount.replacingOccurrences(of: ",", with: ".")) ?? 0
 		
 		let tipValue = orderAmount * (tipSelection / 100)
 		let grandTotal = orderAmount + tipValue
