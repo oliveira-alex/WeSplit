@@ -8,23 +8,22 @@
 import SwiftUI
 
 struct ContentView: View {
-	let students = ["Harry", "Hermione", "Ron"]
-	@State private var selectedStudent = "Harry"
-    
+	@State private var checkAmount = ""
+	@State private var numberOfPeople = 2
+	@State private var tipPercentage = 2
+	
+	let tipPercentages = [10, 15, 20, 25, 0]
+	
 	var body: some View {
-		VStack {
-			HStack(spacing: 0.0){
-				Text("Select your student")
-					.frame(maxWidth: 60)
-				
-				Picker("", selection: $selectedStudent) {
-					ForEach(students, id: \.self) { student in
-						Text(student)
-					}
-				}
+		Form {
+			Section {
+				TextField("Amount", text: $checkAmount)
+					.keyboardType(.decimalPad)
 			}
 			
-			Text("Selected student: \(selectedStudent)")
+			Section {
+				Text("$\(checkAmount)")
+			}
 		}
 	}
 }
