@@ -14,16 +14,19 @@ struct ContentView: View {
 	
 	let tipPercentages = [10, 15, 20, 25, 0]
 	
-	var totalPerPerson: Double {
-		let peopleCount = Double(numberOfPeople + 2)
+	var total: Double {
 		let tipSelection = Double(tipPercentages[tipPercentage])
 		let orderAmount = Double(checkAmount.replacingOccurrences(of: ",", with: ".")) ?? 0
 		
 		let tipValue = orderAmount * (tipSelection / 100)
-		let grandTotal = orderAmount + tipValue
-		let amountPerPerson = grandTotal / peopleCount
 		
-		return amountPerPerson
+		return orderAmount + tipValue
+	}
+	
+	var totalPerPerson: Double {
+		let peopleCount = Double(numberOfPeople + 2)
+		
+		return total / peopleCount
 	}
 	
 	var body: some View {
@@ -49,7 +52,11 @@ struct ContentView: View {
 					.pickerStyle(SegmentedPickerStyle())
 				}
 				
-				Section {
+				Section(header: Text("Total amount")) {
+					Text("$\(total, specifier: "%.2f")")
+				}
+				
+				Section(header: Text("Amount per person")) {
 					Text("$\(totalPerPerson, specifier: "%.2f")")
 				}
 			}
