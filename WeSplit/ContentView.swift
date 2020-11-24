@@ -9,8 +9,8 @@ import SwiftUI
 
 struct ContentView: View {
 	@State private var checkAmount = ""
-	@State private var numberOfPeople = 2
-	@State private var tipPercentage = 2
+	@State private var numberOfPeople = 0
+	@State private var tipPercentage = 4
 	
 	let tipPercentages = [10, 15, 20, 25, 0]
 	
@@ -35,6 +35,12 @@ struct ContentView: View {
 				Section {
 					TextField("Amount", text: $checkAmount)
 						.keyboardType(.decimalPad)
+						.onChange(of: numberOfPeople) { _ in
+							UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+						}
+						.onChange(of: tipPercentage) { _ in
+							UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+						}
 					
 					Picker("Number of people", selection: $numberOfPeople) {
 						ForEach(2 ..< 100) {
