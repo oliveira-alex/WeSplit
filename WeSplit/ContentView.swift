@@ -10,13 +10,13 @@ import SwiftUI
 struct ContentView: View {
 	@State private var checkAmount = ""
 	@State private var numberOfPeople = 0
-	@State private var tipPercentage = 4
+	@State private var tipPercentage = 4   //index used on the array "tipPercentages"
 	
 	let tipPercentages = [10, 15, 20, 25, 0]
 	
 	var total: Double {
 		let tipSelection = Double(tipPercentages[tipPercentage])
-		let orderAmount = Double(checkAmount.replacingOccurrences(of: ",", with: ".")) ?? 0
+		let orderAmount = Double(checkAmount.replacingOccurrences(of: ",", with: ".")) ?? 0  // Because decimalPad in Portuguese shows comma instead of dot
 		
 		let tipValue = orderAmount * (tipSelection / 100)
 		
@@ -60,7 +60,7 @@ struct ContentView: View {
 				
 				Section(header: Text("Total amount")) {
 					Text("$\(total, specifier: "%.2f")")
-						.foregroundColor(tipPercentage == 4 ? .red : .black)
+						.foregroundColor(tipPercentage == 4 ? .red : .black) // case 0% tip is selected
 				}
 				
 				Section(header: Text("Amount per person")) {
